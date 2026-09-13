@@ -1,9 +1,19 @@
-# STM32 接入点
+# STM32 Nucleo-C031 + Wokwi
 
-等买板后在这里放 CubeMX 生成的 CMake 工程。
+同一套 PID 的 MCU 侧实现。上层协议：
 
-建议第一块板：任意 Nucleo-F401 / F103 / G431 + 板载 ST-LINK。
+```text
+T x y          目标位置（米）
+P kp ki kd     增益
+R              回零
+S              查询 POS
+```
 
-目标只覆盖：
+源码：
 
-GPIO / UART / Timer / PWM / ADC / I2C / SPI / DMA / Interrupt / FreeRTOS
+- `firmware/avm_pid.c` — 与 `controller/src/pid.cpp` 同一结构
+- `firmware/avm_app.c` — 二轴对象 + 协议
+- `firmware/host_main.c` — 本机仿真（`avm-mcu-sim`）
+- `firmware/sketch.ino` — Wokwi / Arduino 包装：UART + PWM + LED
+
+建议第一块真板仍是 Nucleo-F401 / G431 + ST-LINK。Wokwi 先用 C031，因为官方支持这条板。

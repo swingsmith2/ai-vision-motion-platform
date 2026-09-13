@@ -18,7 +18,6 @@
 - STM32CubeMX
 - STM32CubeCLT / STM32CubeProgrammer
 - Cortex-Debug / OpenOCD（买板后）
-- Wokwi 扩展（Cursor / VS Code）
 - ROS 2 / Gazebo / MoveIt（第 4 阶段）
 - TensorRT / OpenVINO（有 GPU/工控机后）
 

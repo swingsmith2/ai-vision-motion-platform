@@ -17,7 +17,7 @@ apps/sorter          apps/inspector
          controller (C++)
      PID  Trajectory  GantrySim
                |
-     embedded/  (后续 STM32 / RTOS)
+     embedded/stm32  (同一套 PID，Wokwi Nucleo 仿真)
 ```
 
 ## 数据流
@@ -59,5 +59,5 @@ Synthetic / Dataset Image
 | 合成图像 / 数据集 | 工业相机 / V4L2 / GigE |
 | OpenCV + 自训 ONNX MLP | YOLO / Segmentation + TensorRT |
 | 虚拟 Reject IO | Modbus / PLC |
-| 龙门仿真 | 伺服 / EtherCAT |
+| 龙门仿真 / STM32 Wokwi PID | 伺服 / EtherCAT / 运动控制卡 |
 | 开环 pick-place | 视觉伺服 |

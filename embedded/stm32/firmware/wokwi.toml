@@ -1,0 +1,7 @@
+[wokwi]
+version = 1
+# 必须是编好的 .elf/.hex。不要填 sketch.ino，Wokwi 会当二进制乱跑，内存可到几十 GB。
+firmware = "avm-stm32.hex"
+elf = "avm-stm32.elf"
+# 可选：用 Cursor「Serial Monitor」扩展连 rfc2217://localhost:4000
+rfc2217ServerPort = 4000
