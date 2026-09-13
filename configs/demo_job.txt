@@ -1,0 +1,9 @@
+# 2-axis gantry demo job for avm-motion
+vmax=0.35
+amax=1.10
+dt=0.002
+pid kp=80 ki=8.0 kd=6.0
+waypoint 0.030,0.240
+waypoint 0.180,0.160
+waypoint 0.200,0.040
+waypoint 0.030,0.240

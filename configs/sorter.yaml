@@ -1,0 +1,41 @@
+seed: 5
+detector:
+  backend: ultralytics
+  names: [washer, nut, block]
+  roi_top: 120
+  obj_thr: 0.05
+  train_scenes: 64
+  ultralytics_model: yolov8n.pt
+  epochs: 12
+  imgsz: 416
+  batch: 8
+image:
+  width: 800
+  height: 560
+table:
+  width_m: 0.40
+  height_m: 0.28
+home: [0.03, 0.24]
+bins:
+  washer: [0.05, 0.04]
+  nut: [0.20, 0.04]
+  block: [0.35, 0.04]
+classes:
+  washer:
+    hsv_low: [25, 80, 80]
+    hsv_high: [40, 255, 255]
+    draw_bgr: [210, 210, 40]
+    shape: circle
+    min_area: 180
+  nut:
+    hsv_low: [12, 80, 80]
+    hsv_high: [24, 255, 255]
+    draw_bgr: [40, 170, 220]
+    shape: hex
+    min_area: 180
+  block:
+    hsv_low: [90, 60, 60]
+    hsv_high: [115, 255, 255]
+    draw_bgr: [210, 140, 60]
+    shape: rect
+    min_area: 180

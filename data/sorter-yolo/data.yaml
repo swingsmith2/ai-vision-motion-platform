@@ -1,0 +1,8 @@
+path: /home/ubuntu/WorkSpace/Embedded/ai-vision-motion-platform/data/sorter-yolo
+train: images/train
+val: images/val
+names:
+  0: washer
+  1: nut
+  2: block
+nc: 3
