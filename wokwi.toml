@@ -1,5 +1,0 @@
-[wokwi]
-version = 1
-firmware = "embedded/stm32/firmware/avm-stm32.hex"
-elf = "embedded/stm32/firmware/avm-stm32.elf"
-rfc2217ServerPort = 4000

@@ -1,9 +1,10 @@
 # AI Vision & Motion Control Platform
 
-工业边缘视觉 + 运动控制平台。一个仓库，两个作品：
+工业边缘视觉 + 运动控制平台。一个仓库，三个可演示作品：
 
-1. **AI 视觉自动分拣**（主项目）
-2. **工业视觉缺陷检测 / Edge 部署**（副项目，NEU-CLS 公开数据集）
+1. **AI 视觉自动分拣**
+2. **工业视觉缺陷检测 / Edge 部署**（NEU-CLS 公开数据集）
+3. **光伏铝框跟线**（清扫车沿组件缝走直，合成俯视仿真）
 
 没有开发板、工业相机、伺服时，也能跑通仿真闭环。检测后端可切换：`opencv` / `yolo-onnx` / `ultralytics`（官方 YOLOv8n + 分拣三类微调）。同一套 PID 已下沉到 STM32 风格 C 固件，可在本机或 Wokwi Nucleo-C031 上跑。
 
@@ -56,6 +57,7 @@ cmake --build build -j$(nproc)
 ctest --test-dir build --output-on-failure
 python apps/inspector/run.py
 python apps/sorter/run.py
+python apps/pv_cleaner/run.py
 ./build/embedded/stm32/avm-mcu-sim --target 0.12,0.08
 ```
 
@@ -73,12 +75,14 @@ python apps/sorter/run.py
 
 - `output/sorter/report.html`
 - `output/inspector/report.html`
+- `output/pv_cleaner/report.html`
 
 报告是单文件 HTML（图片和中文字体已内嵌），用浏览器打开。不要在编辑器里当源码预览。WSL 下可用：
 
 ```bash
 bash scripts/open_report.sh sorter
 bash scripts/open_report.sh inspector
+bash scripts/open_report.sh pv_cleaner
 ```
 
 ## 运行结果
@@ -94,6 +98,12 @@ YOLOv8 微调识别垫圈 / 螺母 / 方块，单应性变换后由 C++ 梯形�
 NEU-CLS（1800 张 / 6 类）上训练 MLP，导出 ONNX 后用 ONNX Runtime CPU 推理。本次评测准确率约 83%，平均延迟约 4 ms。
 
 ![工业视觉缺陷检测 · NEU-CLS 报告](docs/images/inspector-preview.png)
+
+### 光伏铝框跟线
+
+合成俯视光伏阵列，OpenCV 提取铝框纵缝，用横向/航向偏差做 PID 走直。起步偏置 180 mm，能贴回锁定纵缝，提线约 3 ms。不是电站真机。详见 [docs/pv_cleaner.md](docs/pv_cleaner.md)。
+
+![光伏铝框跟线仿真](docs/images/pv-cleaner-preview.png)
 
 ## STM32 怎么跑
 
@@ -158,6 +168,7 @@ Wokwi 现在加载 `avm-stm32.hex`。点播放后两路舵机会自动转到 `0.
 ```text
 apps/inspector/     缺陷检测应用
 apps/sorter/        视觉分拣应用
+apps/pv_cleaner/    光伏铝框跟线仿真
 controller/         C++ PID / 轨迹 / 龙门仿真
 embedded/stm32/     STM32 PID 固件 + Wokwi Nucleo
 python/avm/         视觉、AI、协议、报告

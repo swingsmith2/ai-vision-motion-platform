@@ -5,10 +5,10 @@
 ## 分层
 
 ```text
-apps/sorter          apps/inspector
-        \                /
-         \              /
-          python/avm
+apps/sorter          apps/inspector          apps/pv_cleaner
+        \                /                        /
+         \              /                        /
+          python/avm  (vision / ai / robotics / viz)
      vision   ai   robotics   protocols   viz
                  |
         create_detector()
@@ -42,6 +42,17 @@ Synthetic / Dataset Image
   → ONNX MLP
   → OK / NG
   → VirtualRejectIO (Modbus coil 预留)
+```
+
+### 光伏跟线
+
+```text
+Synthetic PV array
+  → downward camera warp
+  → HSV / tophat / Hough 纵缝
+  → e_y, e_θ
+  → PID yaw
+  → differential-drive pose
 ```
 
 ## 为什么 C++ 和 Python 并存
